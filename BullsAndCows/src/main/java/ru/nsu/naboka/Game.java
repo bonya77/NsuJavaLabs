@@ -15,6 +15,7 @@ public class Game implements GameInterface{
         cows = 0;
         attempts = 10;
     }
+
     private void generateNumber(){
 
         Random random = new Random();
@@ -46,7 +47,6 @@ public class Game implements GameInterface{
 
         catch(IOException e){
             System.out.println(e);
-            e.printStackTrace();
             suggested_number = "";
             return;
         }
@@ -54,6 +54,7 @@ public class Game implements GameInterface{
             System.out.printf("end of game");
             return;
         }
+
 
         else if(suggested_number.length() != 4){
             System.out.println("Number should be a four-digit");
@@ -68,12 +69,13 @@ public class Game implements GameInterface{
         cows = 0;
         for (int i = 0; i < hidden_number.length(); i++) {
             for (int j = 0; j < suggested_number.length(); j++) {
-                if (hidden_number.charAt(i) == suggested_number.charAt(j)) {
-                    cows++;
-                }
                 if(hidden_number.charAt(i) == suggested_number.charAt(j) && (i == j)){
                     bulls++;
                 }
+                else if (hidden_number.charAt(i) == suggested_number.charAt(j)) {
+                    cows++;
+                }
+
             }
         }
         System.out.println("number of cows: " + cows);
