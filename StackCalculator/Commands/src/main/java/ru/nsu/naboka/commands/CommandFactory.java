@@ -2,8 +2,8 @@ package ru.nsu.naboka.commands;
 
 import ru.nsu.naboka.exceptions.FabricException;
 
-public class CommandFabric {
-    public Command CreateCommand(String key){
+public class CommandFactory {
+    public ru.nsu.naboka.Command CreateCommand(String key){
         if(key.equalsIgnoreCase("define")){
             return (new DefineCommand());
         }

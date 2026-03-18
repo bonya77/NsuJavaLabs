@@ -4,7 +4,9 @@ import ru.nsu.naboka.Context;
 import ru.nsu.naboka.exceptions.CalculatorException;
 import ru.nsu.naboka.exceptions.UnknownCommandException;
 
-public class DefineCommand implements Command{
+import java.util.List;
+
+public class DefineCommand implements ru.nsu.naboka.Command {
     private static boolean isDigit(String str)  throws CalculatorException{
         try{
             Double.parseDouble(str);
@@ -15,13 +17,13 @@ public class DefineCommand implements Command{
         }
     }
 
-    public void execute(Context context, String[] args){
-        if(args.length != 3){
+    public void execute(Context context, List<String> args){
+        if(args.size() != 3){
             throw new UnknownCommandException("invalid number of arguments");
         }
-        if(isDigit(args[1]) || !isDigit(args[2])){
+        if(isDigit(args.get(1)) || !isDigit(args.get(2))){
             throw new CalculatorException("not right order of params");
         }
-        context.getMap().put(args[1], Double.parseDouble(args[2]));
+        context.getMap().put(args.get(1), Double.parseDouble(args.get(2)));
     }
 }

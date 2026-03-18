@@ -7,11 +7,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reader {
     private BufferedReader bufReader;
     private final String[] args;
-    private String[] parts;
+    private List<String> parts;
     private boolean endOfFile;
 
     Reader(String[] args){
@@ -46,10 +48,10 @@ public class Reader {
                 }
                 line = line.trim();
                 if(line.isEmpty()){
-                    parts = new String[0];
+                    parts = new ArrayList<>();
                 }
                 else{
-                    parts = line.split("\\s+");
+                    parts = List.of(line.split("\\s+"));
                 }
                 return true;
             }
@@ -68,8 +70,8 @@ public class Reader {
         return bufReader;
     }
 
-    String[] getParts(){
-        return parts != null ? parts : new String[0];
+    List<String> getParts(){
+        return parts != null ? parts : new ArrayList<>();
     }
 
     public void close() {

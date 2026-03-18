@@ -4,11 +4,13 @@ import ru.nsu.naboka.exceptions.CalculatorException;
 import ru.nsu.naboka.exceptions.CommandException;
 import ru.nsu.naboka.exceptions.UnknownCommandException;
 
+import java.util.List;
+
 import static java.lang.Math.sqrt;
 
-public class SqrtCommand implements Command{
-    public void execute(Context context, String[] args)  throws CalculatorException{
-        if(args.length != 1){
+public class SqrtCommand implements ru.nsu.naboka.Command {
+    public void execute(Context context, List<String> args)  throws CalculatorException{
+        if(args.size() != 1){
             throw new UnknownCommandException("invalid number of arguments");
         }
         if(context.getStack().isEmpty()){

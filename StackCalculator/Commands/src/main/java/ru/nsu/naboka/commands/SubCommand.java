@@ -4,9 +4,11 @@ import ru.nsu.naboka.Context;
 import ru.nsu.naboka.exceptions.CalculatorException;
 import ru.nsu.naboka.exceptions.CommandException;
 
-public class SubCommand implements Command{
-    public void execute(Context context, String[] args)  throws CalculatorException{
-        if(args.length != 1){
+import java.util.List;
+
+public class SubCommand implements ru.nsu.naboka.Command {
+    public void execute(Context context, List<String> args)  throws CalculatorException{
+        if(args.size() != 1){
             throw new CommandException("invalid number of arguments");
         }
         if(context.getStack().size() < 2){

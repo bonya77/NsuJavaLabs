@@ -5,9 +5,11 @@ import ru.nsu.naboka.exceptions.CalculatorException;
 import ru.nsu.naboka.exceptions.CommandException;
 import ru.nsu.naboka.exceptions.UnknownCommandException;
 
-public class PrintCommand implements Command{
-    public void execute(Context context, String[] args)  throws CalculatorException{
-        if(args.length != 1){
+import java.util.List;
+
+public class PrintCommand implements ru.nsu.naboka.Command {
+    public void execute(Context context, List<String> args)  throws CalculatorException{
+        if(args.size() != 1){
             throw new UnknownCommandException("invalid number of arguments");
         }
         if(context.getStack().isEmpty()){

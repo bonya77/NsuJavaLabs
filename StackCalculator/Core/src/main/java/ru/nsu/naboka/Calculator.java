@@ -1,22 +1,23 @@
 package ru.nsu.naboka;
 
-import ru.nsu.naboka.commands.Command;
-import ru.nsu.naboka.commands.CommandFabric;
+import ru.nsu.naboka.commands.CommandFactory;
 import ru.nsu.naboka.exceptions.CalculatorException;
+
+import java.util.List;
 
 
 public class Calculator {
     private final Context context = new Context();
-    private final CommandFabric fabric = new CommandFabric();
+    private final CommandFactory fabric = new CommandFactory();
 
     void execute(Reader reader) {
         try {
             while (reader.readNextLine()) {
-                String[] parts = reader.getParts();
-                if (parts[0].startsWith("#") || parts[0].isEmpty()) {
+                List<String> parts = reader.getParts();
+                if (parts.getFirst().startsWith("#") || parts.getFirst().isEmpty()) {
                     continue;
                 }
-                String commandName = parts[0];
+                String commandName = parts.getFirst();
                 Command command = null;
                 try {
                     command = fabric.CreateCommand(commandName);
