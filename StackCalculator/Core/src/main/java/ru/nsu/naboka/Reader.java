@@ -1,7 +1,6 @@
 package ru.nsu.naboka;
 
 import ru.nsu.naboka.exceptions.CalculatorException;
-import ru.nsu.naboka.exceptions.ReaderException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -16,7 +15,7 @@ public class Reader {
     private List<String> parts;
     private boolean endOfFile;
 
-    Reader(String[] args){
+    public Reader(String[] args){
         this.args = args;
         createBufReader();
     }

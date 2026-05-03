@@ -1,34 +1,35 @@
 package ru.nsu.naboka;
 
-import ru.nsu.naboka.commands.CommandFactory;
 import ru.nsu.naboka.exceptions.CalculatorException;
 
 import java.util.List;
 
-
 public class Calculator {
     private final Context context = new Context();
-    private final CommandFactory fabric = new CommandFactory();
+    private final CommandFactory commandFactory;
 
-    void execute(Reader reader) {
+    public Calculator() {
+        this.commandFactory = new CommandFactory();
+    }
+
+    public void execute(Reader reader) {
         try {
             while (reader.readNextLine()) {
                 List<String> parts = reader.getParts();
-                if (parts.getFirst().startsWith("#") || parts.getFirst().isEmpty()) {
+                if (parts.isEmpty() || parts.getFirst().startsWith("#")) {
                     continue;
                 }
+
                 String commandName = parts.getFirst();
-                Command command = null;
+
                 try {
-                    command = fabric.CreateCommand(commandName);
+                    Command command = commandFactory.CreateCommand(commandName);
                     command.execute(context, parts);
                 } catch (CalculatorException e) {
-                    System.out.println("Cannot to execute command: " + e.getMessage());
-                    continue;
+                    System.out.println("Cannot execute command: " + e.getMessage());
                 }
             }
-        }
-        catch(CalculatorException e){
+        } catch (CalculatorException e) {
             System.out.println(e.getMessage());
         }
     }
