@@ -48,13 +48,10 @@ public class TerminalController implements Runnable {
     }
 
     private void simulateKeyHold(Direction dir, int duration) throws InterruptedException {
-        // 1. "Нажимаем" клавишу через публичный сеттер состояния
         setMoving(dir, true);
 
-        // 2. Ждем, пока GameEngine двигает игрока в своем потоке
         Thread.sleep(duration);
 
-        // 3. "Отпускаем" клавишу
         setMoving(dir, false);
     }
 
