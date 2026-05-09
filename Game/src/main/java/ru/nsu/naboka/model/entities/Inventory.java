@@ -7,6 +7,9 @@ public class Inventory {
     private final Map<ItemType, Integer> resources = new HashMap<>();
     private final int cellCapacity = 64;
 
+    public Map<ItemType, Integer> getResources(){
+        return resources;
+    }
     public void addItem(ItemType type, int amount){
         if(resources.containsKey(type) || resources.size() < 8){
             resources.put(type, (Math.min((resources.getOrDefault(type, 0) + amount), cellCapacity)));

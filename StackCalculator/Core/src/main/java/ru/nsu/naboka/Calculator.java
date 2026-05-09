@@ -23,7 +23,7 @@ public class Calculator {
                 String commandName = parts.getFirst();
 
                 try {
-                    Command command = commandFactory.CreateCommand(commandName);
+                    Command command = commandFactory.CreateCommand(commandName, parts);
                     command.execute(context, parts);
                 } catch (CalculatorException e) {
                     System.out.println("Cannot execute command: " + e.getMessage());

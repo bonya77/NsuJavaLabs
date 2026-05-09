@@ -24,9 +24,10 @@ public class Main {
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
+        GameEngine engine = new GameEngine(model, controller);
+
         frame.setVisible(true);
 
-        GameEngine engine = new GameEngine(model, controller);
         engine.start();
     }
 }
