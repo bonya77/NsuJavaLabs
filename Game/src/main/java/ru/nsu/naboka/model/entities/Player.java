@@ -55,7 +55,7 @@ public class Player extends Entity {
         inventory.addItem(BasicResourceType.STONE, 20);
     }
     //выделить update  перенести тудаи
-    public void move(Direction direction) {
+    private void move(Direction direction) {
         switch(direction){
             case UP -> y_position -= speed;
             case DOWN -> y_position += speed;

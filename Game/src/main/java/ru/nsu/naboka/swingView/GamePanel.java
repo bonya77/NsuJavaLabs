@@ -1,4 +1,4 @@
-package ru.nsu.naboka.view;
+package ru.nsu.naboka.swingView;
 
 import ru.nsu.naboka.model.GameObserver;
 import ru.nsu.naboka.model.GameWorld;
@@ -8,8 +8,6 @@ import ru.nsu.naboka.model.entities.Tree;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.nio.Buffer;
-
 public class GamePanel extends JPanel implements GameObserver {
     private final GameWorld model;
 
@@ -97,15 +95,10 @@ public class GamePanel extends JPanel implements GameObserver {
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        //фон
         drawBackground(g);
-        //остальные игровые объекты
         drawOtherEntities(g);
-        //ирок
         drawPlayer(g);
-        //инвентарь
         drawInventory(g);
-
     }
 
 

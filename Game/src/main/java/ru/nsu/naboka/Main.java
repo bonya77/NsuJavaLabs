@@ -1,33 +1,31 @@
 package ru.nsu.naboka;
 
-import ru.nsu.naboka.controller.Controller;
-import ru.nsu.naboka.model.GameWorld;
-import ru.nsu.naboka.view.GamePanel;
+import ru.nsu.naboka.swingView.SwingStarter;
+import ru.nsu.naboka.terminalView.TerminalStarter;
 
 import javax.swing.*;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import static java.lang.System.in;
+
 public class Main {
     static void main() {
-        GameWorld model = new GameWorld();
-        GamePanel view = new GamePanel(model);
-        Controller controller = new Controller(model);
+        InputStream inputStream = new BufferedInputStream(in);
+        System.out.println("Choose view: \n 1 for swing \n 2 for terminal\n");
+        Scanner scanner = new Scanner(new InputStreamReader(inputStream));
+        int viewChecker = scanner.nextInt();
 
-        model.subscribe(view);
+        if(viewChecker == 1){
+            SwingStarter swingStarter = new SwingStarter();
+            swingStarter.start();
+        }
+        if(viewChecker == 2){
+            TerminalStarter terminalStarter = new TerminalStarter();
+            terminalStarter.start();
+        }
 
-        JFrame frame = new JFrame("2d tycon");
-        frame.add(view);
-
-        frame.addKeyListener(controller);
-
-
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        GameEngine engine = new GameEngine(model, controller);
-
-        frame.setVisible(true);
-
-        engine.start();
     }
 }

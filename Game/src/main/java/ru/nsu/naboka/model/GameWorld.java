@@ -1,6 +1,7 @@
 package ru.nsu.naboka.model;
 
 import ru.nsu.naboka.model.entities.*;
+import ru.nsu.naboka.swingView.ResourceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +10,12 @@ public class GameWorld {
     private final Player player;
     private ArrayList<AbstractMachine> machines;
 
-    private ArrayList<GameObserver> subscriders = new ArrayList<>();
-    private List<Entity> entities = new ArrayList<>();
+    private final ArrayList<GameObserver> subscriders = new ArrayList<>();
+    private final List<Entity> entities = new ArrayList<>();
+
+    private boolean processing = false;
     public GameWorld() {
+        ResourceManager.loadresources();
         loadForestLevel();
         this.player = new Player(0, 0);
     }
@@ -35,14 +39,10 @@ public class GameWorld {
         return entities;
     }
 
-    public void notifySubscribers(){
+    private void notifySubscribers(){
         for(GameObserver obs : subscriders){
             obs.OnModelUpdated();
         }
-    }
-
-    public void addEntity(Entity ent){
-        entities.add(ent);
     }
 
     public void interact(){
@@ -67,10 +67,39 @@ public class GameWorld {
         player.update();
         if(player.isInteract()){
             interact();
+            player.setInteract(false);
         }
     }
 
     public Player getPlayer(){
         return player;
     }
+
+    private void gameEngine(){
+        Thread gameThread = new Thread(() ->
+        {
+            while(processing){
+                update();
+                notifySubscribers();
+                try{
+                    Thread.sleep(16);
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+//        gameThread.setDaemon(true);
+        gameThread.start();
+    }
+
+    public void gameStart(){
+        processing = true;
+        gameEngine();
+    }
+
+    public void gameStop(){
+        processing = false;
+    }
+
 }

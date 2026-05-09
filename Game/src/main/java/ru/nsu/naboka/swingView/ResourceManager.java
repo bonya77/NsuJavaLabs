@@ -1,4 +1,4 @@
-package ru.nsu.naboka.view;
+package ru.nsu.naboka.swingView;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
