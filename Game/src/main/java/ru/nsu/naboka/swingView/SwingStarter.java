@@ -10,6 +10,7 @@ public class SwingStarter {
         GameWorld model = new GameWorld();
         GamePanel view = new GamePanel(model);
         Controller controller = new Controller(model);
+        ResourceManager.loadresources();
 
         model.subscribe(view);
 

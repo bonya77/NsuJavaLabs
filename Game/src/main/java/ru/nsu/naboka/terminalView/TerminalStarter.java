@@ -1,6 +1,5 @@
 package ru.nsu.naboka.terminalView;
 
-import ru.nsu.naboka.controller.Controller;
 import ru.nsu.naboka.controller.TerminalController;
 import ru.nsu.naboka.model.GameWorld;
 

@@ -3,6 +3,7 @@ package ru.nsu.naboka.swingView;
 import ru.nsu.naboka.model.GameObserver;
 import ru.nsu.naboka.model.GameWorld;
 import ru.nsu.naboka.model.entities.Entity;
+import ru.nsu.naboka.model.entities.Stone;
 import ru.nsu.naboka.model.entities.Tree;
 
 import javax.swing.*;
@@ -24,13 +25,11 @@ public class GamePanel extends JPanel implements GameObserver {
         var resources = model.getPlayer().getInventory().getResources();
 
         for (var entry : resources.entrySet()) {
-        // Рисуем рамку слота
             g.setColor(new Color(0, 0, 0, 180));
             g.fillRoundRect(x, y, slotSize, slotSize, 10, 10);
             g.setColor(Color.GRAY);
             g.drawRoundRect(x, y, slotSize, slotSize, 10, 10);
 
-            // Пишем название ресурса и количество
             g.setFont(new Font("Arial", Font.BOLD, 12));
             g.drawString(entry.getKey().toString(), x + 5, y + 25);
             g.setColor(Color.YELLOW);
@@ -87,6 +86,10 @@ public class GamePanel extends JPanel implements GameObserver {
                         ResourceManager.getTreeSprite() :
                         ResourceManager.getStumpSprite();
                 g.drawImage(treeSprite, x, y, tree.getWidth(), tree.getHeight(), null);
+            }
+
+            if(ent instanceof Stone stone){
+                g.fillRect(ent.getX(), ent.getY(), 20, 20);
             }
 
         }

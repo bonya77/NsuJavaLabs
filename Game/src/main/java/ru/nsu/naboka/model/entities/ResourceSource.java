@@ -5,6 +5,11 @@ public abstract class ResourceSource extends Entity{
     protected int currentAmount;
     protected int capacity;
 
+    protected int tickCounter = 0;
+    boolean isAvailableForMine; //если true - можно добывать и ресуется дерево, елси false добывать нельзя и рисуется пенек
+
+    protected int recoveryTime = 300; //5 секунд примерно при 60 фпс будет
+
     BasicResourceType basicType;
     SpecialResourceType specialType;
 
@@ -22,10 +27,7 @@ public abstract class ResourceSource extends Entity{
         return currentAmount;
     }
 
-    protected int tickCounter = 0;
-    boolean isAvailableForMine; //если true - можно добывать и ресуется дерево, елси false добывать нельзя и рисуется пенек
 
-    protected int recoveryTime = 300; //5 секунд примерно при 60 фпс будет
 
     public boolean isAvailableForMine(){
         return isAvailableForMine;

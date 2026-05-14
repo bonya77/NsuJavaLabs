@@ -1,7 +1,6 @@
 package ru.nsu.naboka.model;
 
 import ru.nsu.naboka.model.entities.*;
-import ru.nsu.naboka.swingView.ResourceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +14,10 @@ public class GameWorld {
 
     private boolean processing = false;
     public GameWorld() {
-        ResourceManager.loadresources();
-        loadForestLevel();
+
+        loadForestAndStoneLevel();
         this.player = new Player(0, 0);
     }
-
 
     public void subscribe(GameObserver gameObserver){
         subscriders.add(gameObserver);
@@ -32,6 +30,21 @@ public class GameWorld {
             int randomX = (int) (Math.random() * 800);
             int randomY = (int) (Math.random() * 600);
             entities.add(new Tree(randomX, randomY));
+        }
+    }
+    public void loadForestAndStoneLevel() {
+        entities.clear();
+        // Генерируем 10 случайных деревьев
+        for (int i = 0; i < 10; i++) {
+            int randomX = (int) (Math.random() * 800);
+            int randomY = (int) (Math.random() * 600);
+            entities.add(new Tree(randomX, randomY));
+        }
+        //и 10 камней
+        for(int i = 0; i < 10; i++){
+            int randomX = (int) (Math.random() * 800);
+            int randomY = (int) (Math.random() * 600);
+            entities.add(new Stone(randomX, randomY));
         }
     }
 
@@ -58,7 +71,6 @@ public class GameWorld {
             }
         }
     }
-
 
     public void update(){
         for(Entity ent : entities){

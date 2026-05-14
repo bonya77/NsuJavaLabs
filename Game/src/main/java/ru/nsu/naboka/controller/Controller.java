@@ -8,8 +8,6 @@ import java.awt.event.KeyEvent;
 public class Controller extends KeyAdapter {
     private final GameWorld model;
 
-
-
     public Controller(GameWorld model){
         this.model = model;
     }

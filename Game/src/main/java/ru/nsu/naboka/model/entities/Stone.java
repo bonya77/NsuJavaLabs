@@ -1,21 +1,20 @@
 package ru.nsu.naboka.model.entities;
 
-public class Tree extends ResourceSource implements Interactable{
+public class Stone extends ResourceSource implements Interactable{
 
-    public Tree(int x, int y){
-        super(x, y, 64, 64);
+    public Stone(int x, int y) {
+        super(x, y, 20, 20);
         isAvailableForMine = true;
-        this.basicType = BasicResourceType.WOOD;
+        this.basicType = BasicResourceType.STONE;
     }
+
 
     @Override
     public void interact(Player player) {
         if(isAvailableForMine){
-            player.getInventory().addItem(basicType,1);
-
+            player.getInventory().addItem(basicType, 1);
             isAvailableForMine = false;
             tickCounter = 0;
         }
     }
-
 }

@@ -20,11 +20,12 @@ public class Player extends Entity {
     private final Inventory inventory = new Inventory();
 
 
-    public double getScale(){ return scale; }
+    public double getScale(){
+        return scale;
+    }
     public boolean isMoving(){
         return (movingUp || movingDown || movingRight || movingLeft);
     }
-
     public boolean isMovingDown() {
         return movingDown;
     }
@@ -37,9 +38,12 @@ public class Player extends Entity {
     public boolean isMovingUp() {
         return movingUp;
     }
-    public boolean isInteract(){ return isInteract; }
-
-    public Inventory getInventory(){ return inventory; }
+    public boolean isInteract(){
+        return isInteract;
+    }
+    public Inventory getInventory(){
+        return inventory;
+    }
 
     public void setInteract(boolean state){ this.isInteract = state; }
     public void setMovingUp(boolean state){ this.movingUp = state; }
@@ -50,11 +54,10 @@ public class Player extends Entity {
     public Player(int startX, int startY){
         super(startX, startY, (int) (64 * 3.0), (int)(64*3.0));
         this.scale = 3;
-//        super(startX, startY, (int) (64 * scale), 64);
         inventory.addItem(BasicResourceType.WOOD, 1);
         inventory.addItem(BasicResourceType.STONE, 20);
     }
-    //выделить update  перенести тудаи
+
     private void move(Direction direction) {
         switch(direction){
             case UP -> y_position -= speed;
@@ -64,6 +67,7 @@ public class Player extends Entity {
         }
     }
 
+    @Override
     public void update(){
         if(isMovingUp()) move(Direction.UP);
         if(isMovingDown()) move(Direction.DOWN);
@@ -86,7 +90,6 @@ public class Player extends Entity {
         updateAnimation();
         return currentFrame;
     }
-
 
     public int getBaseSize() {
         return baseSize;
